@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .a{
+            overflow: hidden;
+        }
+        .small{
+            width: 30px;
+            height: 30px;
+            background: skyblue;
+            float: left;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        .big{
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            position: absolute;
+
+
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var oDiv1=document.querySelectorAll('.small');
+            var oDiv2=document.querySelectorAll('.big');
+
+            for (var i=0;i<3;i++){
+                oDiv1[i].index=i;
+                oDiv1[i].onclick=function () {
+                    for (var i=0;i<3;i++){
+                        oDiv1[i].style.backgroundColor='';
+                        oDiv2[i].style.display='none';
+
+                    }
+                    this.style.backgroundColor='yellow';
+                    oDiv2[this.index].style.display='block'
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="a">
+<div class="small">1</div>
+<div class="small">2</div>
+<div class="small">3</div>
+</div>
+<div class="big">1</div>
+<div class="big">2</div>
+<div class="big">3</div>
+</body>
+</html>

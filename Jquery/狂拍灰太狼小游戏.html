@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .container{
+            width: 320px;
+            height: 450px;
+            background: url("image/game_bg.jpg");
+            margin: 100px auto;
+            position: relative;
+        }
+        h1{
+            color: white;
+            margin-left: 60px;
+        }
+        .jdt{
+            width: 180px;
+            height: 16px;
+            position: absolute;
+            background: url("image/progress.png");
+            top: 66px;
+            left: 63px;
+
+        }
+        button{
+            width: 150px;
+            line-height: 35px;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 320px;
+            margin-left: -75px;
+            color: white;
+            background: linear-gradient(#E55C3D,#C50000);
+            border: none;
+            border-radius: 20px;
+        }
+        .rule{
+            width: 320px;
+            line-height: 20px;
+            background: #cccccc;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+        .rules{
+            color: white;
+            width: 320px;
+            height: 450px;
+            background: rgba(0,0,0,0.5);/*opacity作用于元素，以及元素内的所有内容的透明度，而rgba()只作用于元素的颜色或其背景色*/
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            line-height: 50px;
+            padding-top: 100px;
+            box-sizing: border-box;
+            display: none;
+        }
+        .rules>a{
+            color: red;
+        }
+        .over {
+            width: 320px;
+            height: 450px;
+           /* background: skyblue;*/
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+
+        }
+        .over>.hh{
+            color: red;
+            padding-top: 200px;
+            text-shadow: 3px 3px 10px white;
+
+        }
+        .over>button{
+            background: linear-gradient(#74Accf,#007ddc);
+        }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            $('.rule').click(function () {
+                $('.rules').stop().fadeIn(100)
+            });
+            $('a').click(function () {
+                $('.rules').stop().fadeOut(100)
+            })
+            $('button').eq(0).click(function () {
+                jdta();
+                wolf();
+                });
+
+            $('button').eq(1).click(function () {
+                $('.over').stop().fadeOut(1000);
+                $('button').eq(0).fadeIn(1000);
+                $('.jdt').width(180);
+
+
+            })
+        });
+        //进度条
+        function jdta() {
+            $('button').eq(0).stop().fadeOut(100);
+            var oWidth=$('.jdt').width();
+            var  timer=setInterval(function () {
+                oWidth+=-1;
+                if (oWidth<0){
+                    clearInterval(timer);
+                    $('.over').stop().fadeIn(1000);
+                    stopAnimation();
+                }
+                $('.jdt').width(oWidth);
+            },100);
+
+        }
+
+        var timers=null;
+        //动画
+        function wolf() {
+            var wolf_1=['./image/h0.png','./image/h1.png','./image/h2.png','./image/h3.png','./image/h4.png','./image/h5.png','./image/h6.png','./image/h7.png','./image/h8.png','./image/h9.png'];
+            var wolf_2=['./image/x0.png','./image/x1.png','./image/x2.png','./image/x3.png','./image/x4.png','./image/x5.png','./images/x6.png','./image/x7.png','./image/x8.png','./image/x9.png'];
+            var arrPos = [
+                {left:"100px",top:"115px"},
+                {left:"20px",top:"160px"},
+                {left:"190px",top:"142px"},
+                {left:"105px",top:"193px"},
+                {left:"19px",top:"221px"},
+                {left:"202px",top:"212px"},
+                {left:"120px",top:"275px"},
+                {left:"30px",top:"295px"},
+                {left:"209px",top:"297px"}
+            ];
+            var oImg=$('<img src="" class="IMG">');
+             window.index1=Math.round(Math.random()*1);
+            var WolfType = index1==0?wolf_1:wolf_2;
+            var index=Math.ceil(Math.random()*8);
+            window.index2=0;
+            window.index4=5;
+             timers=setInterval(function () {
+                if(index2>index4){
+                    oImg.remove();
+                    clearInterval(timers);
+                    wolf();
+                }
+                oImg.attr('src',WolfType[index2]);
+                index2++;
+            },200);
+
+            oImg.css({
+                position:'absolute',
+                left:arrPos[index].left,
+                top:arrPos[index].top
+            });
+            $('.container').append(oImg)
+            clk(oImg);
+        }
+        //点击的时候
+        function clk(a) {
+            a.one('click',function () {
+                window.index2=6;
+                window.index4=9;
+                var wolfl = $(this).attr('src');
+                if (window.index1==0){
+                    $('.hh1').text(parseInt($('.hh1').text())+10);
+                } else{
+                    $('.hh1').text(parseInt($('.hh1').text())-10);
+                }
+                
+            })
+        }
+
+        //停止动画
+        function stopAnimation() {
+
+            $('.IMG').remove();
+            clearInterval(timers);
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1 class="hh1">0</h1>
+    <div class="jdt"></div>
+    <button>开始游戏</button>
+    <div class="rule">游戏规则</div>
+    <div class="rules">
+        <p>游戏规则:</p>
+        <p>1.游戏时间:60s</p>
+        <p>2.拼手速,殴打灰太狼+10分</p>
+        <p> 3.殴打小灰灰-10分</p>
+        <a href="#">[关闭]</a>
+    </div>
+    <div class="over">
+        <h1 class="hh">GAMEOVER</h1>
+        <button>重新开始</button>
+    </div>
+</div>
+
+</body>
+</html>

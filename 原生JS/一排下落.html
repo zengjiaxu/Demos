@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+    </style>
+    <script>
+        window.onload=function () {
+
+            for (var i = 0; i < 20; i++) {
+                var gDiv = document.createElement('div');
+                gDiv.style.width = '50px';
+                gDiv.style.height = '50px';
+                gDiv.style.backgroundColor = 'blue';
+                gDiv.style.position = 'absolute';
+                gDiv.style.left = i * 60 + 'px';
+                gDiv.style.top = '0';
+                gDiv.style.transition='0.5s all ease';
+                document.body.appendChild(gDiv);
+            }
+            var oDiv=document.getElementsByTagName('div');
+            var index=0;
+            var timer=null;
+            var a=1;
+
+            document.onclick=function () {
+               if (a==2)return;
+               a=2;
+                console.log(a)
+                if (index==0) {
+
+                    clearInterval(timer);
+                    timer=setInterval(function () {
+                        if (index<=oDiv.length-1) {
+                            oDiv[index].style.top = '100px';
+                            index++;
+
+                        }
+                        else{
+                            a=1;
+                            clearInterval(timer);
+                            return index=oDiv.length-1;
+
+
+
+                        }
+
+
+                    },50);
+
+
+                }
+                else{
+
+                    clearInterval(timer);
+                    timer=setInterval(function () {
+                        if (index>=0) {
+                            oDiv[index].style.top = '0';
+                            index--;
+
+
+                        }
+                        else{
+                            a=1;
+                            clearInterval(timer);
+                            return index=0;
+
+                        }
+                    },50)
+                }
+
+
+                    };
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

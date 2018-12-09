@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .nav{
+            width: 300px;
+            margin: 50px auto;
+           /* border: 1px solid #000;*/
+            list-style: none;
+        }
+        .nav>li{
+            border: 1px solid #000;
+            line-height: 35px;
+            border-bottom: none;
+            text-indent: 2em;
+            position: relative;
+           /* background: skyblue;*/
+
+        }
+        .nav>li:last-child{
+            border-bottom: 1px solid #000;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .nav>li>span{
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            background: url("image/arrow_right.png") no-repeat center center;
+            position: absolute;
+            right: 0;
+            top: 5px;
+
+        }
+        .nav>li:first-child{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .sub{
+            list-style: none;
+            display: none;
+        }
+        .sub>li{
+            background: purple;
+            border-bottom: 1px solid white;
+        }
+        .nav>li:last-child{
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .sub>li:hover{
+            background: orange;
+        }
+        .li1>span{
+            transform: rotate(90deg);
+        }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            $('.nav>li').click(function () {
+                $(this).children('.sub').slideDown(100);
+                $(this).siblings().children('.sub').slideUp(100);
+               /* $(this).addClass('li1');
+                $(this).siblings().removeClass('li1');*/
+               $(this).children('span').css('transform','rotate(90deg)');
+               $(this).siblings().children('span').css('transform','');
+
+            })
+        });
+    </script>
+</head>
+<body>
+<ul class="nav">
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单 <span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+
+    </style>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function(){
+
+            Vue.directive('drag', function () {
+                this.el.onmousedown = function (ev) {
+                    var ev = ev || window.event;
+                    var l = ev.clientX - this.offsetLeft;
+                    var y = ev.clientY - this.offsetTop;
+                    document.onmousemove = function (ev) {
+                        var ev = ev || window.event;
+                        this.style.left = ev.clientX - l + 'px';
+                        this.style.top = ev.clientY - y + 'px';
+
+                    }.bind(this);
+                    document.onmouseup = function () {
+                        this.onmousemove = this.onmouseup = null
+                    }
+
+                };
+
+            });
+            Vue.directive('colors',function () {
+               this.el.onclick=function () {
+                   this.style.backgroundColor='red';
+               }
+            });
+            new Vue({
+                el:'body'
+
+            });
+
+
+
+        };
+    </script>
+</head>
+<body>
+<div v-drag v-colors :style='{width:"200px",height:"200px",background:"black",position:"absolute"}' id="div1"></div>
+<div v-colors :style='{width:"200px",height:"200px",background:"black",position:"absolute",left:"300px"}' id="div2"></div>
+
+</body>
+</html>

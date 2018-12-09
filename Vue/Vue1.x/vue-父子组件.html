@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:'#div1',
+                data:{
+
+                },
+                components: {
+                    cooDoo:Vue.extend({
+                        data(){
+                            return{
+                                msg:'hello vue'
+                            }
+                        },
+                        template:'#temp',
+                        components:{
+                            bbb:Vue.extend({
+                                template:'#bo'
+                            })
+                        }
+                    })
+                }
+            })
+        };
+
+    </script>
+</head>
+<body>
+<div id="div1">
+    <coo-doo>
+    </coo-doo>
+</div>
+<template id="temp">
+    <p>HELLO</p>
+    <bbb></bbb>
+</template>
+<template id="bo">
+    <p>world</p>
+</template>
+
+</body>
+</html>

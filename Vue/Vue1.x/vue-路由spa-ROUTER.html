@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script src="vue/bower_components/vue-router/dist/vue-router.js"></script>
+    <script>
+        window.onload=function () {
+            var app=Vue.extend();
+
+            var smile=Vue.extend({
+                template:'#a'
+            });
+            var cry=Vue.extend({
+                template:'#b'
+            });
+            var fee=Vue.extend({
+                template:'#c'
+            });
+
+            var router=new VueRouter();
+
+            router.map({
+                'smile':{
+                    component:smile
+                },
+                'cry':{
+                    component:cry
+                },
+                'fee':{
+                    component:fee
+                }
+            });
+            router.start(app,'#box')
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+<a v-link="{path:'/smile'}">嘿嘿</a>
+<a v-link="{path:'/cry'}">呵呵</a>
+<a v-link="{path:'/fee'}">哈哈</a>
+    <router-view></router-view>
+</div>
+<template id="a">
+    <h1>微笑</h1>
+</template>
+<template id="b">
+    <h1>哭泣</h1>
+</template>
+<template id="c">
+    <h1>余额</h1>
+</template>
+</body>
+</html>

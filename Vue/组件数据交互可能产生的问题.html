@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/_vue@2.5.17@vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <aaa :content="'zee'"></aaa>
+    <aaa :content="'jax'"></aaa>
+</div>
+<script>
+    Vue.prototype.bus=new Vue();
+    Vue.component("aaa",{
+        data(){
+          return{
+              selfContent:this.content
+          }
+        },
+        props:["content"],
+        template:"<div @click='handleClick'>{{selfContent}}</div>",
+        methods:{
+            handleClick(){
+                this.bus.$emit("change",this.selfContent)
+            }
+        },
+        mounted(){
+            var _this=this;
+            this.bus.$on("change",function (msg) {
+                _this.selfContent=msg
+            })
+        }
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

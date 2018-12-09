@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="vue/bower_components/animate.css/animate.min.css">
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        div{
+            width: 200px;
+            height: 200px;
+
+        }
+        .back-transition{
+            background: skyblue;
+        }
+
+    </style>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"body",
+                data:{
+                    show:"true"
+                },
+                methods:{
+                    changed:function () {
+                        this.show=!this.show
+                    }
+                },
+                transitions: {
+                    back:{
+                        enterClass:'bounceIn',
+                        leaveClass:'bounceOut'
+                    }
+                }
+            })
+        }
+    </script>
+
+</head>
+<body>
+<button @click="changed" >点我</button>
+<div v-show="show" transition="back" class="animated">
+    
+</div>
+
+</body>
+</html>

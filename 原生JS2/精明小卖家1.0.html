@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            let sourceData = [{
+                product: "手机",
+                region: "华东",
+                sale: [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270]
+            }, {
+                product: "手机",
+                region: "华北",
+                sale: [80, 70, 90, 110, 130, 145, 150, 160, 170, 185, 190, 200]
+            }, {
+                product: "手机",
+                region: "华南",
+                sale: [220, 200, 240, 250, 260, 270, 280, 295, 310, 335, 355, 380]
+            }, {
+                product: "笔记本",
+                region: "华东",
+                sale: [50, 60, 80, 110, 30, 20, 70, 30, 420, 30, 20, 20]
+            }, {
+                product: "笔记本",
+                region: "华北",
+                sale: [30, 35, 50, 70, 20, 15, 30, 50, 710, 130, 20, 20]
+            }, {
+                product: "笔记本",
+                region: "华南",
+                sale: [80, 120, 130, 140, 70, 75, 120, 90, 550, 120, 110, 100]
+            }, {
+                product: "智能音箱",
+                region: "华东",
+                sale: [10, 30, 4, 5, 6, 5, 4, 5, 6, 5, 5, 25]
+            }, {
+                product: "智能音箱",
+                region: "华北",
+                sale: [15, 50, 15, 15, 12, 11, 11, 12, 12, 14, 12, 40]
+            }, {
+                product: "智能音箱",
+                region: "华南",
+                sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
+            }];
+            var oSel=document.getElementById('region-select');
+            var oSelP=document.getElementById('product-select');
+            var oTr=document.getElementsByTagName('tr')[0];
+            var oTbody=document.getElementsByTagName('tbody')[0];
+            var oDiv1=document.getElementById('region-radio-wrapper');
+            var oDiv2=document.getElementById('product-radio-wrapper');
+            var arrPhone=[];
+            var arrCom=[];
+            var arrLis=[];
+            var arrMonth=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+            var arrCheckBox1=['华东','华南','华北'];
+            var arrCheckBox2=['手机','笔记本','智能音箱'];
+            oSel.onchange=function () {
+                if (oSel.selectedIndex!=0&&oSelP.selectedIndex!=0) {
+                    oTbody.innerHTML = '';
+                    addBin();
+                }
+                else{
+                    oTbody.innerHTML = '';
+                    addTr();
+                }
+
+            };
+            oSelP.onchange=function(){
+                if (oSel.selectedIndex!=0&&oSelP.selectedIndex!=0) {
+                    oTbody.innerHTML = '';
+                    addBin();
+                }
+                else{
+                    oTbody.innerHTML = '';
+                    addPro();
+                }
+            };
+
+            //获取地区相同数据
+            function getData() {
+                var arrEast=[];
+                var arrSouth=[];
+                var arrNorth=[];
+                if (oSel.selectedIndex==1){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华东') {
+                            arrEast.push(sourceData[i]);
+                        }
+                    }
+                    return arrEast;
+
+                }
+                if (oSel.selectedIndex==2){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华南') {
+                            arrSouth.push(sourceData[i]);
+                        }
+                    }
+                    return arrSouth;
+
+                }
+                if (oSel.selectedIndex==3){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华北') {
+                            arrNorth.push(sourceData[i]);
+                        }
+                    }
+                    return arrNorth;
+
+
+                }
+            }
+            //获取商品相同数据
+            function getProductData() {
+                if (oSelP.selectedIndex==1){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].product == '手机') {
+                            arrPhone.push(sourceData[i]);
+                        }
+                    }
+                    return arrPhone;
+
+                }
+                if (oSelP.selectedIndex==2){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].product == '笔记本') {
+                            arrCom.push(sourceData[i]);
+                        }
+                    }
+                    return arrCom;
+
+                }
+                if (oSelP.selectedIndex==3){
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].product == '智能音箱') {
+                            arrLis.push(sourceData[i]);
+                        }
+                    }
+                    return arrLis;
+
+
+                }
+            }
+
+
+
+            //表头加入月份数据
+            function addMonth() {
+                for (var i=0;i<12;i++) {
+                    var oTh = document.createElement('th');
+
+                    oTr.appendChild(oTh);
+                    oTh.innerHTML=arrMonth[i];
+                }
+            }
+            addMonth();
+            //创建行列，并添加地区数据
+            function addTr() {
+                for (var i=0;i<3;i++) {
+                    var oTrr = document.createElement('tr');
+                    oTbody.appendChild(oTrr);
+                    for (var j=0;j<14;j++){
+                        var oTrd = document.createElement('td');
+                        oTrr.appendChild(oTrd);
+                        if (i==0&&j==0){
+                            oTrd.innerHTML=getData()[i].product;
+                        }
+                        else if (i==1&&j==0){
+                            oTrd.innerHTML=getData()[i].product;
+                        }
+                        else if (i==2&&j==0){
+                            oTrd.innerHTML=getData()[i].product;
+                        }
+                        else if (i<3&&j==1){
+                            oTrd.innerHTML=getData()[i].region;
+                        }
+                        else{
+                            oTrd.innerHTML=getData()[i].sale[j-2];
+                        }
+
+                    }
+
+                }
+            }
+            //创建行列，并添加商品数据
+            function addPro() {
+                for (var i=0;i<3;i++) {
+                    var oTrr = document.createElement('tr');
+                    oTbody.appendChild(oTrr);
+                    for (var j=0;j<14;j++){
+                        var oTrd = document.createElement('td');
+                        oTrr.appendChild(oTrd);
+                        if (i<3&&j==0){
+                            oTrd.innerHTML=getProductData()[i].product;
+                        }
+                        else if (i==0&&j==1){
+                            oTrd.innerHTML=getProductData()[i].region;
+                        }
+                        else if (i==1&&j==1){
+                            oTrd.innerHTML=getProductData()[i].region;
+                        }
+                        else if (i==2&&j==1){
+                            oTrd.innerHTML=getProductData()[i].region;
+                        }
+                        else{
+                            oTrd.innerHTML=getProductData()[i].sale[j-2];
+                        }
+
+
+                    }
+
+                }
+            }
+            // 根据select选项获取数据
+            function getBinData() {
+                var arrBin=[];
+                if (oSel.selectedIndex==1&&oSelP.selectedIndex==1) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华东'&&sourceData[i].product == '手机') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==1&&oSelP.selectedIndex==2) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华东'&&sourceData[i].product == '笔记本') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==1&&oSelP.selectedIndex==3) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华东'&&sourceData[i].product == '智能音箱') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==2&&oSelP.selectedIndex==1) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华南'&&sourceData[i].product == '手机') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==2&&oSelP.selectedIndex==2) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华南'&&sourceData[i].product == '笔记本') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==2&&oSelP.selectedIndex==3) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华南'&&sourceData[i].product == '智能音箱') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==3&&oSelP.selectedIndex==1) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华北'&&sourceData[i].product == '手机') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==3&&oSelP.selectedIndex==2) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华北'&&sourceData[i].product == '笔记本') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+                if (oSel.selectedIndex==3&&oSelP.selectedIndex==3) {
+                    for (var i=0;i<9;i++) {
+                        if (sourceData[i].region == '华北'&&sourceData[i].product == '智能音箱') {
+                            arrBin.push(sourceData[i]);
+                        }
+                    }
+                    return arrBin;
+                }
+
+            }
+            getBinData();
+            //添加
+            function addBin() {
+                if (oSel.selectedIndex!=0&&oSelP.selectedIndex!=0) {
+                    var oTrr = document.createElement('tr');
+                    oTbody.appendChild(oTrr);
+                    for (var j = 0; j < 14; j++) {
+                        var oTrd = document.createElement('td');
+                        oTrr.appendChild(oTrd);
+                        if (j == 0) {
+                            oTrd.innerHTML = getBinData()[0].product;
+                        }
+                        else if (j == 1) {
+                            oTrd.innerHTML = getBinData()[0].region;
+                        }
+                        else {
+                            oTrd.innerHTML = getBinData()[0].sale[j - 2];
+                        }
+
+                    }
+                    oTrr.style.backgroundColor='skyblue';
+                }
+            }
+            //生成一组checkbox
+            function createdCheckBox(contain,arr) {
+                var checkHtml='<input type="checkbox">';
+                var result=[];
+                for (var i=0;i<3;i++) {
+                    result.push(arr[i]+checkHtml);
+                }
+                contain.innerHTML=' 全选<input type="checkbox" check-types="all">'+result[0]+result[1]+result[2];
+                var oInput=contain.getElementsByTagName('input');
+                contain.onclick=function (ev) {
+                    var ev=ev||window.event;
+                    var target=ev.target||ev.srcElement;
+                    if (target.getAttribute('check-types')=='all'&&target.checked===true){
+                        for (var i=0;i<4;i++){
+                            oInput[i].checked=true;
+                        }
+
+                    }
+                    if (oInput[1].checked==true&&oInput[2].checked==true&&oInput[3].checked==true){
+                        oInput[0].checked=true;
+                    }
+                    if (oInput[1].checked==false||oInput[2].checked==false||oInput[3].checked==false){
+                        oInput[0].checked=false;
+                    }
+                    if (oInput[1].checked==false&&oInput[2].checked==false&&oInput[3].checked==false) {
+                        target.checked=true;
+                    }
+
+
+            }
+            }
+            createdCheckBox(oDiv1,arrCheckBox1);
+
+            createdCheckBox(oDiv2,arrCheckBox2);
+
+            //
+        }
+    </script>
+</head>
+<body>
+<select id="region-select" style="width: 200px;height: 30px;">
+    <option  selected="selected">地区</option>
+    <option>华东</option>
+    <option>华南</option>
+    <option>华北</option>
+</select>
+<select id="product-select" style="width: 200px;height: 30px;">
+    <option  selected="selected">商品</option>
+    <option>手机</option>
+    <option>笔记本</option>
+    <option>智能音箱</option>
+</select>
+<div id="region-radio-wrapper">
+
+
+
+</div>
+<div id="product-radio-wrapper"></div>
+<table border="10" cellspacing="5" cellpadding="30px" style="margin-top: 40px">
+    <thead>
+    <tr>
+    <th>商品</th>
+    <th>地区</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+</html>

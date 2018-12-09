@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>实现三栏水平布局之Flex布局</title>
+    <style type="text/css">
+        .c{
+
+            width: 100%;
+            height: 100px;
+            display: flex;
+            flex-flow: wrap row;
+        }
+        .m{
+           flex: 1;
+            background-color: blue;
+        }
+        .l{
+            flex-basis: 100px;
+            order: -1;
+
+            background-color: green;
+        }
+        .r{
+            flex-basis: 100px;
+
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="c">
+    <div class="m">main</div>
+    <div class="r">right</div>
+    <div class="l">left</div>
+</div>
+</body>
+</html>
+

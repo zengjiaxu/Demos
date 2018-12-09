@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src='bower_components/vue/dist/vue.js'></script>
+    <script type="text/javascript" src='bower_components/vue-router/dist/vue-router.js'></script>
+    <script type="text/javascript" src='vue-resource.js'></script>
+</head>
+<body>
+<div id='box'>
+    <router-link to='/news/21617636'>束手就情：一不小心嫁总裁</router-link>
+    <router-link to='/news/21366663'>唯妻至上，总裁老公欠收拾</router-link>
+
+    <router-view></router-view>
+</div>
+
+<template id='book'>
+    <div>
+
+        <ccc :msg='$route'></ccc>
+        <!--
+        {{$route.fullPath}}<br>
+        {{$route.params}}<br>
+        {{$route.path}}<br>
+        -->
+    </div>
+</template>
+<template id='ccc'>
+
+    <div>
+        {{msg.params}}<br>
+        {{text}}
+    </div>
+</template>
+<script type="text/javascript">
+    Vue.filter('json',(val)=>{
+        console.log(val);
+    });
+    const routes = [
+        {
+            path:'/news/:sss',
+            component:{
+                template:"#book",
+                components:{
+                    'ccc':{
+                        template:'#ccc',
+                        props:['msg'],
+                        data(){
+                            return {
+                                text:''
+                            }
+                        },
+                        mounted(){
+                            //console.log(this.msg)
+
+                            //console.log(this.$http);
+                            //	console.log(this.msg)
+                            this.$http.get('http://localhost:2183/book',{
+                                id:this.msg.params.sss
+                            }).then((res)=>{
+                                console.log(res.data)
+                                this.text = res.data.data
+                            }).catch(()=>{
+                                console.log('失败了～')
+                            })
+                        },
+                        updated(){
+                            //console.log(1);
+                            this.$http.get('http://localhost:2183/book',{
+                                id:this.msg.params.sss
+                            }).then((res)=>{
+                                console.log(res.data)
+                                this.text = res.data.data
+                            }).catch(()=>{
+                                console.log('失败了～')
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    ];
+
+    const router = new VueRouter({
+        routes
+    });
+
+    new Vue({
+        router,
+        el:'#box'
+    })
+
+
+</script>
+</body>
+</html>

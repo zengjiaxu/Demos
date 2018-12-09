@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div2{
+            width: 200px;
+            height: 200px;
+           /* background: #000;*/
+            position: absolute;
+            left: 50%;
+            margin-left: -100px;
+        }
+
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        window.onload=function () {
+            var aDiv=document.getElementById('div1');
+            var A=20;
+            var B=20;
+            var oDiv=aDiv.getElementsByTagName('div');
+            for (var i=0;i<A;i++){
+                for (var j=0;j<B;j++){
+                    var getDiv=document.createElement('div');
+                    getDiv.style.width=aDiv.offsetWidth/A+'px';
+                    getDiv.style.height=aDiv.offsetWidth/B+'px';
+                    getDiv.style.position='absolute';
+                    getDiv.style.left=B*j/2+'px';
+                    getDiv.style.top=A*i/2+'px';
+                    getDiv.style.backgroundColor='skyBlue';
+                    getDiv.style.transition=(Math.random()*1)+'s all ease';
+                    aDiv.appendChild(getDiv);
+                }
+            }
+            var index=oDiv.length-1;
+            var timer=null;
+            var a=1;
+            /*oDiv[index].style.backgroundColor="#ccc"*/
+            document.onclick=function () {
+                if (a==2)return;
+                a=2;
+                if (index==oDiv.length-1){
+                    clearInterval(timer);
+                    timer=setInterval(
+                        function () {
+                            if (index>=0) {
+                                oDiv[index].style.top=300+oDiv[index].offsetTop+'px';
+                                oDiv[index].style.backgroundColor='blue';
+                                index--;
+                            }
+                            else{//index=-1
+                                a=1;
+                                clearInterval(timer);
+                                return index=0;
+                            }
+                        },10)
+                }
+                else{
+                    clearInterval(timer);
+                    timer=setInterval(
+                        function () {
+                            if (index<oDiv.length) {
+                                oDiv[index].style.top=oDiv[index].offsetTop-300+'px';
+                                oDiv[index].style.background='blue';
+                                index++;
+                            }
+                            else{//index=oDiv.length+1
+                                a=1;
+                                clearInterval(timer);
+                                return index=oDiv.length-1;
+                            }
+                        },10)
+                }
+
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="div1" class="div2">
+
+</div>
+
+</body>
+</html>

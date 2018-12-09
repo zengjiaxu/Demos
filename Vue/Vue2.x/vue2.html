@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"#div",
+                data:{
+                    msg: {
+                        a: "我是父级的数据"
+                    }
+                },
+                components:{
+
+
+                    aaa:{
+                        data(){
+                            return{
+                                a:""
+                            }
+                        },
+                        methods:{
+                          change(){
+                              this.a="改变数据"
+                          }
+                        },
+                        mounted(){
+                            this.a=this.my.a
+                        },
+                        props:['my'],
+                        template:"#aaa"
+                    }
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="div">
+    <h1>我是父级我的数据是=>{{msg.a}}</h1>
+    <aaa :my="msg"></aaa>
+</div>
+<template id="aaa">
+    <div>
+        <h1>我是子级我的数据是=>{{a}}</h1>
+        <button @click="change">改变</button>
+    </div>
+</template>
+</body>
+</html>

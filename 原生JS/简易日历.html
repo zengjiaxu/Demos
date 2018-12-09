@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .calender {
+            background:#ccc;
+            margin: auto;
+            width: 240px;
+            height:auto;
+        }
+        li {
+            float: left;
+            border: solid 5px;
+            width: 50px;
+            height: 50px;
+            background:#666;
+            text-align: center;
+            float: left;
+            color:white;
+        }
+        .calender div {
+            float: left;
+            background:#666;
+            height: 270px;
+            width: 240px;
+            text-align:center;
+        }
+        .active {
+            background:white;
+            color:pink;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var arr=[
+                'aaaa','bbbb','ccccc','ddd'
+            ];
+            var odiv=document.getElementById('main');
+            var oli=document.getElementsByTagName('li');
+            var adiv=odiv.getElementsByTagName('div')[0];
+            for (var i = 0; i < oli.length; i++){
+                oli[i].index=i;
+                oli[i].onclick=function () {
+                    for (var i=0;i<oli.length;i++){
+
+
+                        oli[i].className='';
+                    }
+                    this.className='active';
+                    adiv.innerHTML= '<h2>'+(this.index+1)+'月</h2> <p>'+arr[this.index]+'</p>';
+                }
+            }
+
+
+
+        }
+    </script>
+</head>
+<body>
+<div id="main" class="calender">
+    <ul>
+        <li class="active"><h2>1</h2> <p>Jan</p></li>
+        <li><h2>2</h2><p>Feb</p></li>
+        <li><h2>3</h2><p>Mar</p></li>
+        <li><h2>4</h2><p>Apr</p></li>
+        <li><h2>5</h2><p>May</p></li>
+        <li><h2>6</h2><p>Jun</p></li>
+        <li><h2>7</h2><p>Jul</p></li>
+        <li><h2>8</h2><p>Aug</p></li>
+        <li><h2>9</h2><p>Sep</p></li>
+        <li><h2>10</h2><p>Oct</p></li>
+        <li><h2>11</h2><p>Nov</p></li>
+        <li><h2>12</h2><p>Dec</p></li>
+    </ul>
+
+    <div class="content" >
+        <h2>1月</h2>
+        <p>hello</p>
+
+    </div>
+
+</div>
+</body>
+</html>

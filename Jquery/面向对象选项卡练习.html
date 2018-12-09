@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        #tab>div{
+            display: none;
+        }
+        #tab>div:nth-of-type(1){
+            background: yellow;
+            width: 200px;
+            height: 200px;
+
+        }
+        #tab>div:nth-of-type(2){
+            background: blanchedalmond;
+            width: 200px;
+            height: 200px;
+            display: block;
+        }
+        #tab>div:nth-of-type(3){
+            background: orange;
+            width: 200px;
+            height: 200px;
+        }
+        .active{
+            background: yellow;
+        }
+
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+                function TabNode(node) {
+                    var _this=this;//dom元素this永远指向发生事件源，所以在事件函数中为了区分this 在事件外的函数定义一个变量保存this，也就是指向对象的this用_this，事件内的this是指向事件源；
+                    this.ff1(node);
+                    this.ff2(_this);
+
+                }
+                TabNode.prototype={
+                    "ff1":function (node) {
+                        this.allBtn=node.Node.getElementsByTagName('button');
+                        this.allDiv=node.Node.getElementsByTagName('div');
+                    },
+                    "ff2":function (_this) {
+                        for (var i=0;i<this.allBtn.length;i++){
+                            this.allBtn[i].index=i;//放在onclick事件的前面，for循环的里面  因为点击事件的时候 for循环已经加载完了；
+                            this.allBtn[i].onclick=function () {
+                                for(var i=0;i<_this.allBtn.length;i++) {
+                                    _this.allBtn[i].className = '';
+                                    _this.allDiv[i].style.display='none';
+                                }
+                                this.className='active';
+                                _this.allDiv[this.index].style.display='block';
+
+
+                            }
+                        }
+                    }
+                };
+
+
+                new TabNode({
+                    "Node":document.getElementById('tab')
+                });
+        });
+    </script>
+</head>
+<body>
+<div id="tab">
+<button>按钮</button>
+<button>按钮</button>
+<button>按钮</button>
+<div></div>
+<div></div>
+<div></div>
+</div>
+</body>
+</html>

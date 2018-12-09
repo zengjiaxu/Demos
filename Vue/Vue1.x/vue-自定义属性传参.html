@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        a{
+            border: 1px solid #000;
+        }
+    </style>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function() {
+            Vue.directive('dj', function (val) {
+                this.el.style.backgroundColor = val
+            });
+            new Vue({
+                el: "body",
+                data:{
+                    dp:"blue"
+                }
+
+            })
+        }
+    </script>
+
+
+</head>
+<body>
+<input type="text" v-model="dp">
+<div v-dj="dp"  :style='{width:"200px",height:"200px",position:"absolute"}' id="div1"></div>
+<!--dp指的是data中的key值-->
+
+</body>
+</html>

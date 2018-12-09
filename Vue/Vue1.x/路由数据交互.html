@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script src="vue/bower_components/vue-router/dist/vue-router.js"></script>
+    <script>
+        window.onload=function () {
+            Vue.filter('aaa',function (val) {
+                console.log(val);
+            });
+            var app=Vue.extend();
+
+            var login=Vue.extend({
+                template:'#login'
+            });
+            var xs=Vue.extend({
+                template:'#xs'
+            });
+            var xslist1=Vue.extend({
+                template:'#xslist1',
+                components:{
+                    'need':{
+                        props:['params'],
+                        template:'#need'
+                    }
+                }
+            });
+            var xslist2=Vue.extend({
+                template:'#xslist2'
+            });
+
+            var router=new VueRouter;
+
+            router.map({
+                login:{
+                    component:login
+                },
+                xs:{
+                    component:xs,
+                    subRoutes:{
+                        '/xslist1/:id':{
+                            component:xslist1,
+                        },
+                        '/xslist2/:id':{
+                            component:xslist2
+                        }
+                    }
+                }
+            });
+
+            router.start(app,'#box');
+            router.redirect({
+                '/':'login'
+            })
+
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <a v-link="{path:'/login'}">登录注册</a>
+    <a v-link="{path:'/xs'}">小说</a>
+    <router-view></router-view>
+
+</div>
+<template id="login"><h2>请登录</h2></template>
+<template id="xs">
+    <h3>选一本小说看看吧</h3>
+    <a v-link="{path:'/xs/xslist1/201801?a=1'}">我是小说1</a>
+    <a v-link="{path:'/xs/xslist2/201802?a=2'}">我是小说2</a>
+    <router-view></router-view>
+</template>
+<template id="xslist1">
+   <div>{{$route.params | json}}</div>
+   <div>{{$route.query | json}}</div>
+   <div>{{$route.path }}</div>
+    <need :params="$route.params"></need>   //子级拿父级的数据
+
+</template>
+<template id="xslist2">
+    <div>mmmmmmmmmmmmmmm</div>
+</template>
+<template id="need">
+    <h1>{{params |json}}</h1>
+</template>
+</body>
+</html>

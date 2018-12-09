@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+      window.onload=function () {
+          var oBtn1=document.getElementById('a');
+          var oBtn2=document.getElementById('b');
+          var oBtn3=document.getElementById('c');
+          var oBtn4=document.getElementById('d');
+          var oBtn5=document.getElementById('e');
+          var oBtn6=document.getElementById('f');
+          var oDiv=document.getElementById('contABC');
+          var oDiv1=document.getElementById('contDEF');
+
+          function Hash(){
+              return location.hash.slice(1)
+          }
+        function draw(){
+              if (Hash().length==1){
+                  oDiv.innerHTML=Hash().slice(0,1);
+              }
+              else{
+                  oDiv.innerHTML=Hash().slice(0,1);
+                  oDiv1.innerHTML=Hash().slice(1,2)
+              }
+
+
+        }
+           oBtn1.onclick = function() {
+               if (location.hash.slice(1).length<2) {
+                   if ("DEF".indexOf(location.hash.slice(1))==-1) {
+                       location.hash = oBtn1.innerHTML
+                   }
+                   else{
+                       location.hash=oBtn1.innerHTML+location.hash.slice(1)
+                   }
+
+               }
+               else{
+                   location.hash=location.hash.replace(/[A-C]/,oBtn1.innerHTML)
+               }
+           };
+           oBtn2.onclick = function() {
+               if (location.hash.slice(1).length<2) {
+                   if ("DEF".indexOf(location.hash.slice(1))==-1) {
+                       location.hash = oBtn2.innerHTML
+                   }
+                   else{
+                       location.hash=oBtn2.innerHTML+location.hash.slice(1)
+                   }
+
+               }
+               else{
+                   location.hash=location.hash.replace(/[A-C]/,oBtn2.innerHTML)
+               }
+           };
+           oBtn3.onclick = function() {
+               if (location.hash.slice(1).length<2) {
+                   if ("DEF".indexOf(location.hash.slice(1))==-1) {
+                       location.hash = oBtn3.innerHTML
+                   }
+                   else{
+                       location.hash=oBtn3.innerHTML+location.hash.slice(1)
+                   }
+
+               }
+               else{
+                   location.hash=location.hash.replace(/[A-C]/,oBtn3.innerHTML)
+               }
+           };
+          oBtn4.onclick = function() {
+              if (location.hash.slice(1).length<2) {
+                  if ("ABC".indexOf(location.hash.slice(1))==-1) {
+                      location.hash = oBtn4.innerHTML
+                  }
+                  else{
+                      location.hash=location.hash+oBtn4.innerHTML
+                  }
+
+              }
+              else{
+                  location.hash=location.hash.replace(/[D-F]/,oBtn4.innerHTML)
+              }
+          };
+          oBtn5.onclick = function() {
+              if (location.hash.slice(1).length<2) {
+                  if ("ABC".indexOf(location.hash.slice(1))==-1) {
+                      location.hash = oBtn5.innerHTML
+                  }
+                  else{
+                      location.hash=location.hash+oBtn5.innerHTML
+                  }
+
+              }
+              else{
+                  location.hash=location.hash.replace(/[D-F]/,oBtn5.innerHTML)
+              }
+          };
+          oBtn6.onclick = function() {
+              if (location.hash.slice(1).length<2) {
+                  if ("ABC".indexOf(location.hash.slice(1))==-1) {
+                      location.hash = oBtn6.innerHTML
+                  }
+                  else{
+                      location.hash=location.hash+oBtn6.innerHTML
+                  }
+
+              }
+              else{
+                  location.hash=location.hash.replace(/[D-F]/,oBtn6.innerHTML)
+              }
+          };
+
+           window.onhashchange = function () {
+              draw();
+          };
+           draw();
+
+
+          
+      }
+    </script>
+</head>
+<body>
+<button id="a">A</button>
+<button id="b">B</button>
+<button id="c">C</button>
+
+<button id="d">D</button>
+<button id="e">E</button>
+<button id="f">F</button>
+
+
+<div id="contABC"></div>
+<div id="contDEF"></div>
+</body>
+</html>

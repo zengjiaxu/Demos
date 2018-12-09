@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .dv{
+
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var oDiv=document.getElementById('div1');
+            var oTxt=oDiv.innerHTML;
+            oDiv.innerHTML=oTxt.replace(/./g,function (x) {
+                return '<span style="color: rgb('+parseInt(Math.random()*256)+','+parseInt(Math.random()*256)+','+parseInt(Math.random()*256)+')">'+x+'</span>'
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div id="div1" class="dv">
+    山东建筑大学（Shandong Jianzhu University）位于山东省济南市，是一所以工为主，
+    以土木建筑学科为特色，工理管文法农艺多学科交叉渗透、协调发展的多科性大学。学校为山东省人民政府与中华人民共和国住房和城乡建设部共建高校 [1]
+    、国家教育部卓越工程师教育培养计划高校、服务国家特殊需求博士人才培养高校、国家“产教融合”项目首批建设高校、山东省首批应用型人才培养特色名校。
+
+</div>
+
+</body>
+</html>

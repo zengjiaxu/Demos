@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数码时钟</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: black;
+        }
+        span{
+            display: inline-block;
+            text-align: center;
+            width: 40px;
+            height: 117px;
+            color: white;
+            font-size: 100px;
+            line-height: 117px;
+        }
+    </style>
+    <script>
+
+        function toDou(n){
+            if(n<10){
+                return '0'+n;
+            }
+            else{
+                return ''+n;
+            }
+        }
+        window.onload=function () {
+            var oImg = document.getElementsByTagName('img');
+            function show() {
+                var oDate = new Date();
+                var arr = toDou(oDate.getHours()) + toDou(oDate.getMinutes()) + toDou(oDate.getSeconds());
+                for (var i = 0; i < oImg.length; i++) {
+                    oImg[i].src = 'img/' + arr[i] + '.jpg';
+                }
+
+            }
+            setInterval(show,1000);
+            show();
+        }
+    </script>
+</head>
+<body>
+<img src="img/0.jpg" alt="">
+<img src="img/1.jpg" alt="">
+<span>:</span>
+<img src="img/2.jpg" alt="">
+<img src="img/3.jpg" alt="">
+<span>:</span>
+<img src="img/4.jpg" alt="">
+<img src="img/5.jpg" alt="">
+
+
+
+</body>
+</html>

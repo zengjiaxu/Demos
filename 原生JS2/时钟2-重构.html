@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            setInterval(show,1000);
+            function show () {
+                var oSp=document.getElementsByTagName('span');
+                var oDate=new Date();
+                var arr=[oDate.getFullYear(),nMonth(),nDate(oDate.getDate()),nDay(),nDate(oDate.getHours()),nDate(oDate.getMinutes()),nDate(oDate.getSeconds())];
+                for(var i=0;i<7;i++){
+                    oSp[i].innerHTML=arr[i];
+                }
+                function nDay() {
+                    var array=['日','一','二','三','四','五','六'];
+                for (var i=0;i<7;i++){
+                        if (oDate.getDay() == i) {
+                            return array[i];
+                        }
+                    }
+                }
+
+                function nMonth() {
+                    if ((oDate.getMonth()+1)<=9) {
+                        return "0"+(oDate.getMonth()+1)
+                    }
+                    else{
+                        return (oDate.getMonth()+1)
+                    }
+                }
+                function nDate(a) {
+                    if (a<=9) {
+                        return "0"+a
+                    }
+                    else{
+                        return a;
+                    }
+                }
+            }
+            show();//让他立即执行 防止挺一秒
+
+
+
+        }
+    </script>
+</head>
+<body>
+ <span></span> 年 <span></span> 月 <span></span> 日 星期 <span></span> <span></span>: <span></span> : <span></span>
+</body>
+</html>

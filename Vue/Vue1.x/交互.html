@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        $(function () {
+                new Vue({
+                    "el":"body",
+                    "data":{
+                        "user":"",
+                        "pass":""
+                    },
+                    "methods":{
+                        "login":function () {
+                            this.$http.get('',{
+                                user:this.user,
+                                pass:this.pass
+                            }).then(function () {
+                                
+                            },function () {
+                                
+                            })
+                        }
+                    }
+                })
+        });
+    </script>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        input{
+            float: right;
+        }
+        .a{
+            width: 240px;
+        }
+    </style>
+</head>
+<body>
+<div class="a">
+<div>
+<label for="">用户名：</label>
+    <input type="text" v-model="user">
+</div>
+<div>
+    <label for="">密码：</label>
+    <input type="text" v-model="pass">
+</div>
+<button @click="login">提交</button>
+</div>
+zz({"q":"1","p":false,"bs":"github","csor":"1","status":0,"g":[ { "q": "163", "t": "n", "st": { "q": "163", "new": 0 } }, { "q": "163邮箱登陆", "t": "n", "st": { "q": "163邮箱登陆", "new": 0 } }, { "q": "126", "t": "n", "st": { "q": "126", "new": 0 } }, { "q": "126邮箱登陆", "t": "n", "st": { "q": "126邮箱登陆", "new": 0 } }, { "q": "12306", "t": "n", "st": { "q": "12306", "new": 0 } }, { "q": "163邮箱", "t": "n", "st": { "q": "163邮箱", "new": 0 } }, { "q": "15家短视频下架", "t": "n", "st": { "q": "15家短视频下架", "new": 0 } }, { "q": "1688", "t": "n", "st": { "q": "1688", "new": 0 } }, { "q": "17173", "t": "n", "st": { "q": "17173", "new": 0 } }, { "q": "163.com", "t": "n", "st": { "q": "163.com", "new": 0 } } ],"s":["163","163邮箱登陆","126","126邮箱登陆","12306","163邮箱","15家短视频下架","1688","17173","163.com"]});
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=1&cb=zz
+</body>
+</html>

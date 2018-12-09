@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+
+      window.onload=function () {
+
+          document.getElementsByTagName("input")[4].onclick=function (){
+             alert(fun())
+          }
+      };
+
+
+
+       /*$(function(){
+           $("input[type='button']").click(function() {
+               alert($("input[type='checkbox']:checked").length);
+           });
+       })*/
+    </script>
+
+</head>
+<body>
+1<input type="checkbox" name="checkbox1">
+2<input type="checkbox" name="checkbox1">
+3<input type="checkbox" name="checkbox1">
+4<input type="checkbox" name="checkbox1">
+<input type="button">
+</body>
+</html>

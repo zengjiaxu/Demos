@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .email-sug{
+            display: none;
+            border: 1px solid skyblue;
+        }
+        li{
+            overflow: hidden;
+        }
+        li:hover{
+            background: skyblue;
+        }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        window.onload=function () {
+
+            var oInp=document.getElementById('email-input');
+            var oUl=document.getElementById('email-sug-wrapper');
+            var oLi=document.getElementsByTagName('li');
+            oInp.focus();
+            //正则表达式转码解码
+            var HtmlUtil = {
+                /*用正则表达式实现html转码*/
+                htmlEncodeByRegExp:function (str){
+                    var s = "";
+                    if(str.length == 0) return "";
+                    s = str.replace(/&/g,"&amp;");
+                    s = s.replace(/</g,"&lt;");
+                    s = s.replace(/>/g,"&gt;");
+                    s = s.replace(/ /g,"&nbsp;");
+                    s = s.replace(/\'/g,"&#39;");
+                    s = s.replace(/\"/g,'"&quot;');
+                    return s;
+                },
+                /*用正则表达式实现html解码*/
+                htmlDecodeByRegExp:function (str){
+                    var s = "";
+                    if(str.length == 0) return "";
+                    s = str.replace(/&amp;/g,"&");
+                    s = s.replace(/&lt;/g,"<");
+                    s = s.replace(/&gt;/g,">");
+                    s = s.replace(/&nbsp;/g," ");
+                    s = s.replace(/'&#39;/,"\'");
+                    s = s.replace(/&quot;/g,"\"");
+                    return s;
+                }
+            };
+            oInp.oninput=function () {
+                    oUl.style.display = 'block';
+                    oUl.style.width = oInp.offsetWidth + 'px';
+                    getInput();
+                    var index=0;
+                    var a=0;
+                        oInp.onkeydown=function(ev){
+                        var ev=ev||window.event;
+
+                            if (ev.keyCode==38){
+                                index--;
+                            ev.preventDefault();
+                            for (var i=0;i<5;i++){
+                                oLi[i].style.backgroundColor='';
+                            }
+
+                        /*   if (index!=0){ //如果当前选中的不是第一个 那么让他前一个变色
+                               index=index-1;
+                           }
+                           else {  //是第一个就让最后一个变色
+                               index=4;
+                           }*/
+                                if (index==-1){
+                                    index=4;
+                            }
+                                oLi[index].style.backgroundColor='skyblue';
+
+                            }
+
+
+                            if(ev.keyCode==40){
+                                index++;
+                                ev.preventDefault();
+                                for (var i=0;i<5;i++){
+                                    oLi[i].style.backgroundColor='';
+                                }
+                               if (index==5){
+                                   index=0;
+                               }
+
+                                oLi[index].style.backgroundColor='skyblue';
+
+
+
+
+                            }
+                            if(ev.keyCode==27){
+                                ev.preventDefault();
+                                $('input').eq(0).select()
+                            }
+                        };
+
+
+                    if (oInp.value=='') {
+                        oUl.style.display = 'none';
+                    }
+            };
+
+            //事件委托
+            oUl.onclick=function(ev){
+                var ev=ev||window.event;
+                var target=ev.target||ev.srcElement;
+                if(target.nodeName.toLowerCase()=='li'){
+                    oInp.value=HtmlUtil.htmlDecodeByRegExp(target.innerHTML);
+                    oUl.style.display = 'none';
+                }
+            };
+
+            oInp.onkeyup=function(){
+
+            };
+
+          /*  oInp.onblur=function () {
+                oUl.style.display = 'none';
+            };*/
+
+        //获取用户输入的内容
+        function getInput() {
+
+            oLi[0].innerHTML = HtmlUtil.htmlEncodeByRegExp(myPin(myTrim(oInp.value))) + '@163.com';
+            oLi[1].innerHTML = HtmlUtil.htmlEncodeByRegExp(myPin(myTrim(oInp.value))) + '@gail.com';
+            oLi[2].innerHTML = HtmlUtil.htmlEncodeByRegExp(myPin(myTrim(oInp.value))) + '@126.com';
+            oLi[3].innerHTML = HtmlUtil.htmlEncodeByRegExp(myPin(myTrim(oInp.value))) + '@qq.com';
+            oLi[4].innerHTML = HtmlUtil.htmlEncodeByRegExp(myPin(myTrim(oInp.value))) + '@263.net';
+        }
+        //用户输入的字符串处理方法，去空格
+            function myTrim(str) {
+                var a=str.replace(/\s+/g,'');
+                return a;
+            }
+        //拼接@
+            function myPin(str1) {
+                //有@
+                if (str1.indexOf('@')!=-1){
+                    return str1.slice(0,str1.indexOf('@'))
+                }
+                else{
+                    return str1;
+                }
+
+            }
+
+
+
+
+        };
+
+
+    </script>
+
+</head>
+<body>
+<div class="wrapper">
+    <input id="email-input" type="text" name="formm">
+    <ul id="email-sug-wrapper" class="email-sug">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>

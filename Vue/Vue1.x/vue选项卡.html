@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: #cccccc;
+        }
+        input.active{
+            background: yellow;
+        }
+    </style>
+    <script>
+        $(function () {
+                new Vue({
+                    "el":"body",
+                    "data":{
+                        index:0,
+                        myInput:["A","B","C"],
+                        myDiv:["1","2","3"]
+                    },
+                    methods: {
+                        add:function ($index) {
+                            this.index=$index
+                        }
+                    }
+                })
+        });
+    </script>
+</head>
+<body>
+<input type="button" v-for="i in myInput" :value="i" @click="add($index)" :class="$index==index?'active':''">
+<div v-for="i in my Div" v-show="$index==index?true:false">{{i}}</div>
+
+</body>
+</html>

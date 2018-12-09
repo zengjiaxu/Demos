@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;list-style: none}
+    </style>
+    <script src="node_modules/_vue@2.5.17@vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="inputValue">
+    <button @click="submitValue">提交</button>
+    <ul>
+        <aaa :content="value" :index="index" v-for="(value,index) in msg" @delete="handleDelete"></aaa>
+    </ul>
+</div>
+<template id="mm">
+    <li @click="handle">{{content}}</li>
+</template>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            msg:[],
+            inputValue:""
+        },
+        methods:{
+            submitValue(){
+                this.msg.push(this.inputValue);
+                this.inputValue="";
+            },
+            handleDelete(index){
+                this.msg.splice(index,1);
+            }
+
+        },
+        components:{
+            aaa:{
+                props:["content","index"],
+                template:"#mm",
+                methods:{
+                    handle(){
+                       this.$emit("delete",this.index)
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

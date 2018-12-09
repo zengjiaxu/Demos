@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script src="vue/bower_components/vue-resource/dist/vue-resource.js"></script>
+
+</head>
+<body>
+<input type="text" id="inp">
+<ul id="ul">
+</ul>
+<script>
+    function zz(obj) {
+        var oUl=document.getElementById('ul');
+        oUl.innerHTML='';
+        for (var i=0;i<obj.s.length;i++){
+
+            var oLi=document.createElement('li');
+            oLi.innerHTML=obj.s[i];
+            oUl.appendChild(oLi);
+        }
+        console.log(obj);
+    }
+    var oIpt=document.getElementById('inp');
+    oIpt.oninput=function () {
+        var oSc=document.createElement('script');
+        oSc.src='https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+this.value+'&cb=zz';
+        document.head.appendChild(oSc);
+        oSc.remove()/*插入之后函数执行完毕移除*/
+    }
+</script>
+</body>
+</html>

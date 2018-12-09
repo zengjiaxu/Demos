@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/_vue@2.5.17@vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component :is="type"></component>
+    <button @click="handleClick">点击</button>
+</div>
+<script>
+    Vue.component("child-one",{
+        template:"<div v-once>child-one</div>"
+    });
+    Vue.component("child-two",{
+        template:"<div v-once>child-two</div>"
+    });
+    new Vue({
+        el:"#app",
+        data:{
+          type:"child-one"
+        },
+        methods:{
+            handleClick(){
+                this.type= this.type==="child-one"?"child-two":"child-one"
+            }
+        }
+    })
+</script>
+</body>
+</html>

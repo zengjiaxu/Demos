@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            var oS1=document.querySelectorAll('select');
+            var oSpan=document.querySelectorAll('span');
+            var oDate=new Date();
+           /* var arr=[oDate.getFullYear(),oDate.getMonth()+1,oDate.getDate(),oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];*/
+
+            //创建节点
+            function createNodes() {
+
+                for (var i = 1; i <= 30; i++) {
+                    var oSd = document.createElement('option');
+                    oSd.value = 2002 + i;
+                    oSd.innerHTML = 2002 + i;
+                    oS1[0].appendChild(oSd)
+                }
+                for (var i = 1; i <= 10; i++) {
+                    var oSm = document.createElement('option');
+                    oSm.value = 2 + i;
+                    oSm.innerHTML = 2 + i;
+                    oS1[1].appendChild(oSm)
+                }
+                for (var i = 1; i <= 29; i++) {
+                    var oSr = document.createElement('option');
+                    oSr.value = 2 + i;
+                    oSr.innerHTML = 2 + i;
+                    oS1[2].appendChild(oSr)
+                }
+                for (var i = 1; i <= 22; i++) {
+                    var oSh = document.createElement('option');
+                    var num=i+1;
+                    oSh.value =  addStr(num);
+                    oSh.innerHTML =  addStr(num);
+                    oS1[3].appendChild(oSh)
+                }
+                for (var i = 1; i <= 58; i++) {
+                    var oSf = document.createElement('option');
+                    var num=i+1;
+                    oSf.value = addStr(num);
+                    oSf.innerHTML = addStr(num);
+                    oS1[4].appendChild(oSf);
+                }
+                for (var i = 1; i <= 58; i++) {
+                    var oSfm = document.createElement('option');
+                    oSfm.value = addStr(i+1);
+                    oSfm.innerHTML = addStr(i+1);
+                    oS1[5].appendChild(oSfm);
+                }
+                
+            }
+           createNodes();
+            //补0
+            function addStr(a) {
+                if (a<=9){
+                    return '0'+a;
+                }
+                else{
+                    return ''+a;
+                }
+            }
+            //选择月份的时候 判断二月
+                    function judYear() {
+
+                    if (oS1[1].selectedIndex==3||oS1[1].selectedIndex==5||oS1[1].selectedIndex==8||oS1[1].selectedIndex==10) {
+                        oS1[2].children[30].style.display='none';
+                        oS1[2].children[29].style.display='block';
+                        oS1[2].children[28].style.display='block';
+                    }
+                    else if (oS1[1].selectedIndex==1){
+                        if (oS1[0].children[oS1[0].selectedIndex].value%4==0) {
+                            oS1[2].children[30].style.display='none';
+                            oS1[2].children[29].style.display='none';
+                            oS1[2].children[28].style.display='block';
+                        }
+                        else{
+                            oS1[2].children[30].style.display='none';
+                            oS1[2].children[29].style.display='none';
+                            oS1[2].children[28].style.display='none';
+                        }
+                    }
+                    else{
+                        oS1[2].children[30].style.display='block';
+                        oS1[2].children[29].style.display='block';
+                        oS1[2].children[28].style.display='block';
+                    }
+                }
+
+
+
+                //获取时间
+                function getTime(){
+                    oSpan[0].innerHTML=oS1[0].children[oS1[0].selectedIndex].value;
+                    oSpan[1].innerHTML=oS1[1].children[oS1[1].selectedIndex].value;
+                    oSpan[2].innerHTML=oS1[2].children[oS1[2].selectedIndex].value;
+                    oSpan[4].innerHTML=oS1[3].children[oS1[3].selectedIndex].value;
+                    oSpan[5].innerHTML=oS1[4].children[oS1[4].selectedIndex].value;
+                    oSpan[6].innerHTML=oS1[5].children[oS1[5].selectedIndex].value;
+                }
+
+
+
+
+                //计算天数
+            function calc() {
+                var oString=oS1[0].children[oS1[0].selectedIndex].value+'/'+oS1[1].children[oS1[1].selectedIndex].value+'/'+oS1[2].children[oS1[2].selectedIndex].value+ '  \v  '+oS1[3].children[oS1[3].selectedIndex].value+':'+oS1[4].children[oS1[4].selectedIndex].value+':'+oS1[5].children[oS1[5].selectedIndex].value;
+
+                //毫秒差
+                var dateCha=new Date().getTime()-new Date(oString).getTime();
+                //天数
+                var Days=Math.floor(dateCha/(24*60*60*1000));
+                //计算天数后剩余的毫秒数
+                var lDay=dateCha%(24*60*60*1000);
+                //小时
+                var Hours=Math.floor(lDay/(3600*1000));
+                //计算小时后剩余的毫秒数
+                var leaveHour=lDay%(3600*1000);
+                //分钟
+                var Min=Math.floor(leaveHour/(60*1000));
+                //计算分钟后剩余的毫秒数
+                var leaveMin=leaveHour%(60*1000);
+                //秒
+                var Sec=Math.floor(leaveMin/1000);
+
+                oSpan[7].innerHTML=Days;
+                oSpan[8].innerHTML=Hours;
+                oSpan[9].innerHTML=Min;
+                oSpan[10].innerHTML=Sec;
+            }
+
+            judYear();
+            getTime();
+            calc();
+            //事件委托
+            document.body.onchange=function (ev) {
+                var ev=ev||window.event;
+                var target = ev.target || ev.srcElement;
+                if (target.nodeName.toLowerCase()=='select') {
+                    judYear();
+                    getTime();
+                }
+            };
+            setInterval(calc,1000)
+            }
+            
+            //判断年份
+
+
+    </script>
+</head>
+<body>
+<select id="year-select">
+    <option value="2000">2000</option>
+    <option value="2001">2001</option>
+    <option value="2002">2002</option>
+</select>
+
+<select id="month-select">
+    <option value="1">1</option>
+    <option value="2">2</option>
+</select>
+
+<select id="day-select">
+    <option value="1">1</option>
+    <option value="2">2</option>
+
+</select>
+
+<select id="hour-select">
+    <option value="00">00</option>
+    <option value="01">01</option>
+</select>
+
+<select id="minite-select">
+    <option value="00">00</option>
+    <option value="01">01</option>
+</select>
+
+<select id="second-select">
+    <option value="00">00</option>
+    <option value="01">01</option>
+</select>
+
+
+<p id="result-wrapper">现在距离 <span></span>年 <span></span>月<span></span>日星期<span></span>, <span></span>:<span></span>:<span></span> 已经过去 <span></span> 天 <span></span> 小时 <span></span>分 <span></span>秒</p>
+
+</body>
+</html>

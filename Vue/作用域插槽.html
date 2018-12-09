@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/_vue@2.5.17@vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<child>
+    <template  slot-scope="props">
+        <h1>{{props.item}}</h1>
+    </template>
+</child>
+</div>
+</body>
+<script>
+    Vue.component("child",
+        {
+            data(){
+              return{
+                  list:[1,2,3,4]
+              }
+            },
+        template:`<div><slot v-for='item in list' :item=item></slot></div>`
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</html>

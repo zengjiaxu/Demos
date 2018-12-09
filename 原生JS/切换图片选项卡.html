@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="move.js"></script>
+    <script>
+        function getByClass(oParent,sClass) {
+            var aEle = oParent.getElementsByTagName('*');
+            var aResult = [];
+            for (var i = 0; i < aEle.length; i++) {
+
+
+                if (aEle[i].className == sClass){
+                    aResult.push(aEle[i]);
+                }
+                    }
+                    return aResult;
+        }
+        window.onload=function () {
+            var oDiv=document.getElementById('div1');
+            var oBtn1=document.getElementById('btn1');
+            var oBtn2=document.getElementById('btn2');
+            var oDivLeft=getByClass(oDiv,'left1')[0];
+            var oDivRight=getByClass(oDiv,'left2')[0];
+            var oDivBottom=getByClass(oDiv,'ul2')[0];
+            var oLiBottom=oDivBottom.getElementsByTagName('li');
+            var oDivTop=getByClass(oDiv,'ul1')[0];
+            var oLiTop=oDivTop.getElementsByTagName('li');
+            var oDivBottom=getByClass(oDiv,'ul2')[0];
+            oDivBottom.style.width=oLiBottom.length*oLiBottom[0].offsetWidth+'px';/*定义ul宽度足够宽*/
+            var oImg=[];
+            for (var i=0;i<oLiTop.length;i++){
+                oImg[i]=oLiTop[i].getElementsByTagName('img')[0];
+            }/*获取当前li下的img*/
+            var now=0;
+
+            var nowZIndex=2;
+            for (var i=0;i<oLiBottom.length;i++){
+                oLiBottom[i].index=i;
+                oLiBottom[i].onclick=function () {
+                    if (this.index==now)return;/*避免重复点击图片刷新*/
+                    now=this.index;
+                    for (var i=0;i<oLiBottom.length;i++){
+                        move(oLiBottom[i],0.4,'opacity')
+                    }
+                    move(this,1,'opacity');
+                    oLiTop[this.index].style.zIndex=nowZIndex++;
+                    oImg[this.index].style.height='0';
+                    move(oImg[this.index],300,'height');
+
+                };
+                oLiBottom[i].onmouseover=function () {
+                    move(this,1,'opacity')
+                };
+                oLiBottom[i].onmouseout=function () {
+                    if(this.index!=now) {
+                        move(this, 0.4, 'opacity')
+                    }
+                    else{
+                        move(this, 1, 'opacity')
+                    }
+                }
+            }
+            oDivLeft.onmouseover=function () {
+                move(oBtn1,1,'opacity');
+            };
+            oDivLeft.onmouseout=function () {
+                move(oBtn1,0,'opacity');
+            };
+            oDivRight.onmouseover=function () {
+                move(oBtn2,1,'opacity');
+            };
+            oDivRight.onmouseout=function () {
+                move(oBtn2,0,'opacity');
+            };
+            oBtn1.onclick=function () {
+              now--;
+              if(now==-1){
+                  now=oLiTop.length-1;
+              }
+                for (var i=0;i<oLiBottom.length;i++){
+                    move(oLiBottom[i],0.4,'opacity')
+                }
+                move(oLiBottom[now],1,'opacity');
+                oLiTop[now].style.zIndex=nowZIndex++;
+
+                oImg[now].style.height='0';
+                move(oImg[now],300,'height');
+                if(now==0||now==1){
+                    move(oDivBottom,0,'left');
+                }
+                else if (now==oLiBottom.length-1){
+                    move(oDivBottom,-((now-3)*oLiBottom[0].offsetWidth),'left');
+                }
+                else {
+                    move(oDivBottom, -(now - 2) * oLiBottom[0].offsetWidth, 'left');
+                }
+
+            };
+            oBtn2.onclick=function () {
+                now++;
+                if (now == oLiTop.length){
+                    now=0;
+                }
+                for (var i=0;i<oLiBottom.length;i++){
+                    move(oLiBottom[i],0.4,'opacity')
+                }
+                move(oLiBottom[now],1,'opacity');
+                oLiTop[now].style.zIndex=nowZIndex++;
+
+                oImg[now].style.height='0';
+                move(oImg[now],300,'height');
+                if(now==0||now==1){
+                    move(oDivBottom,0,'left');
+                }
+                else if (now==oLiBottom.length-1){
+                    move(oDivBottom,-((now-3)*oLiBottom[0].offsetWidth),'left');
+                }
+                else {
+                    move(oDivBottom, -(now - 2) * oLiBottom[0].offsetWidth, 'left');
+                }
+            }
+            var timer=setInterval(oBtn2.onclick,1000);
+            oDiv.onmouseover=function () {
+                clearInterval(timer);
+            }
+            oDiv.onmouseout=function () {
+                timer=setInterval(oBtn2.onclick,1000);
+            }
+
+        }
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div_big{
+
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+
+
+        }
+
+        .div_big .ul1 {
+            width: 600px;
+            height: 300px;
+
+            list-style: none;
+            position: relative;
+        }
+        .div_big .left1{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10000;
+        }
+        .div_big .left1 .btn_1{
+            width: 46px;
+            height: 67px;
+            background: url("img/leftbutton.jpg");
+            position: absolute;
+            top: 117px;
+            left: 0;
+            opacity: 0.1;
+
+        }
+        .div_big .left2 .btn_2{
+            width: 46px;
+            height: 67px;
+            background: url("img/rightbutton.jpg");
+            position: absolute;
+            top: 117px;
+            right: 0;
+            opacity: 0.1;
+
+        }
+
+        .div_big .left2{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .div_big .ul1 li{
+            width: 600px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+        .div_big .ul1 li img{
+            width: 600px;
+            height: 300px;
+
+
+        }
+        .div_big .ul1 .img1{
+            z-index: 1;
+        }
+
+        .div_big .ul2 {
+
+
+            width: 600px;
+            height: 100px;
+            list-style: none;
+            position: absolute;
+            left: 0;
+            top: 300px;
+
+
+        }
+
+        .div_big .ul2 li{
+            width: 150px;
+            height: 100px;
+            float: left;
+            border: 4px solid #cccccc;
+            opacity: 0.4;
+            box-sizing: border-box;
+        }
+        .div_big .ul2 li:nth-child(1){
+            opacity:1;
+        }
+
+        .div_big .ul2 li img{
+            width: 150px;
+            height: 92px;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="div1" class="div_big">
+
+    <ul class="ul1">
+        <li class="img1"><img src="img/hy1.jpg" alt=""></li>
+        <li class="img2"><img src="img/hy2.jpg" alt=""></li>
+        <li class="img3"><img src="img/hy3.jpg" alt=""></li>
+        <li class="img4"><img src="img/hy4.jpg" alt=""></li>
+        <li class="img5"><img src="img/hy5.jpg" alt=""></li>
+        <li class="img6"><img src="img/hy6.jpg" alt=""></li>
+        <li class="img7"><img src="img/hy7.jpg" alt=""></li>
+    </ul>
+    <ul class="ul2">
+        <li><img src="img/hy1.jpg" alt=""></li>
+        <li><img src="img/hy2.jpg" alt=""></li>
+        <li><img src="img/hy3.jpg" alt=""></li>
+        <li><img src="img/hy4.jpg" alt=""></li>
+        <li><img src="img/hy5.jpg" alt=""></li>
+        <li><img src="img/hy6.jpg" alt=""></li>
+        <li><img src="img/hy7.jpg" alt=""></li>
+    </ul>
+    <div class="left1">
+        <input id="btn1" class="btn_1" type="button" value="" />
+    </div>
+    <div class="left2">
+        <input id="btn2" class="btn_2" type="button" value="" />
+    </div>
+
+</div>
+
+</body>
+</html>

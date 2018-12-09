@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        body{
+            height: 3000px;
+        }
+        img{
+            width: 100px;
+            height: 200px;
+            display: none;
+        }
+        img:nth-child(1){
+            position: fixed;
+            left: 0;
+            top: 300px;
+        }
+        img:nth-child(2){
+              position: fixed;
+              right: 0;
+              top: 300px;
+          }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+                $(window)/*window不加引号*/.scroll(function () {
+                    var offset = $('html,body').scrollTop();
+                   /* console.log($("html,body").scrollTop());*/
+                    if(offset>=500){
+                        $('img').show(1000);
+                    }
+                    else{
+                        $('img').hide(1000);
+                    }
+                })
+        });
+
+    </script>
+</head>
+<body>
+<img src="image/hy1.jpg" alt="">
+<img src="image/hy2.jpg" alt="">
+</body>
+</html>

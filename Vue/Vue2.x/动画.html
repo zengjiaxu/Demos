@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+
+        .div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 50%;
+        }
+        .fade-enter-active{
+            transition: 2s;
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 50%;
+        }
+        .fade-enter{
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+        }
+
+
+
+        .fade-leave{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .fade-leave-active{
+            transition: 2s;
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+    </style>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"#box",
+                data:{
+                    msg:false
+                },
+                methods:{
+                    changed(){
+                        this.msg=!this.msg
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="button" @click="changed" value="改变">
+    <transition name="fade">
+        <div class="div1" v-show="msg"></div>
+    </transition>
+</div>
+</body>
+</html>

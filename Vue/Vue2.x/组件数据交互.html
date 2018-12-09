@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script>
+        window.onload=function(){
+            let Vm=new Vue();
+            new Vue({
+                el:"#box",
+                components:{
+                    aaa:{
+                        methods:{
+                            changed(){
+                                Vm.$emit('mya',this.msg)
+                            }
+                        },
+                        data(){
+                            return{
+                                msg:"我是aaa的数据"
+                            }
+                        },
+                        template:"#aaa"
+                    },
+                    bbb:{
+                        methods:{
+                            changed(){
+                                Vm.$emit('myb',this.msgb)
+                            }
+                        },
+                        data(){
+                            return{
+                                msgb:"我是bbb的数据"
+                            }
+                        },
+                        template:"#bbb"
+                    },
+                    ccc:{
+                        data(){
+                            return{
+                                a:"null",
+                                b:"null"
+                            }
+                        },
+                        template:"#ccc",
+                        mounted(){
+                            Vm.$on('mya',(data)=>{
+                                this.a=data
+                            });
+                            Vm.$on('myb',(data)=>{
+                                this.b=data
+                            });
+
+                        }
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div id="box">
+    <aaa></aaa>
+    <bbb></bbb>
+    <ccc></ccc>
+</div>
+<template id="aaa">
+    <div>
+    <button @click="changed">传aaa数据</button>
+    </div>
+</template>
+<template id="bbb">
+    <div>
+<button @click="changed">传bbb数据</button>
+    </div>
+</template>
+<template id="ccc">
+    <div>
+    <h1>{{a}}</h1>
+    <h1>{{b}}</h1>
+    </div>
+</template>
+</body>
+</html>

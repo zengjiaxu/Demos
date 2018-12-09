@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            var oDiv = document.getElementById('fade-obj');
+            var oBtn = document.getElementById('fade-btn');
+            var timer = null;
+            var speed = 100;
+            oBtn.onclick = function () {
+                if (oBtn.innerHTML == '淡出') {
+                    clearInterval(timer);
+                    timer = setInterval(function (){show(-10)}, 100)
+                }
+                else {
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+                        show(10)
+                    }, 100)
+
+                }
+
+
+            };
+
+            function show(quick) {
+                oBtn.setAttribute('disabled', 'true');
+                speed = speed + quick;
+                oDiv.style.opacity = speed / 100;
+                console.log(speed);
+                if (oDiv.style.opacity == 0) {
+                    clearInterval(timer);
+                    oBtn.removeAttribute('disabled');
+                    oBtn.innerHTML = '淡入';
+                }
+                if(oDiv.style.opacity == 1){
+                    clearInterval(timer);
+                    oBtn.removeAttribute('disabled');
+                    oBtn.innerHTML = '淡出';
+                }
+
+            }
+
+            /*function call(quick) {
+                return function () {
+                    show(quick)
+                }
+            }*/
+        }
+
+            /*function back() {
+                oBtn.setAttribute('disabled','true');
+                oDiv.style.opacity=speed/100;
+                speed=speed+10;
+                console.log(speed);
+                if (oDiv.style.opacity==1){
+                    clearInterval(timer);
+                    oBtn.removeAttribute('disabled');
+                    oBtn.innerHTML='淡出';
+                }
+
+            }
+        }*/
+
+    </script>
+</head>
+<body>
+<div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+<button id="fade-btn">淡出</button>
+
+</body>
+</html>

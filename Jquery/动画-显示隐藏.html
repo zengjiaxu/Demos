@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        div{
+            width: 200px;
+            height: 200px;
+            background: #000;
+            display:none;
+        }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            $('button').eq(0).click(function () {
+                $('div').show(1000,function () {//切换 slideDown，slideUp，slideToggle
+                    alert('完毕')
+                })
+            });
+            $('button').eq(1).click(function () {
+                $('div').hide(1000,function () {
+                    alert('完毕')
+                })
+            });
+            $('button').eq(2).click(function () {
+                $('div').toggle(1000,function () {
+                    alert('完毕')
+                })
+            })
+        });
+    </script>
+</head>
+<body>
+
+<button id="btn1">显示</button>
+<button id="btn2">隐藏</button>
+<button>切换</button>
+<div></div>
+
+</body>
+</html>

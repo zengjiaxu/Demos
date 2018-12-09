@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"body",
+                data:{
+                    msg4:""
+                },
+                methods:{
+                    get1:function (msg) {
+                        this.msg4=msg;
+                    }
+                },
+                components:{
+                    aaa:{
+                        data(){
+                            return{
+                                msg1:"Im father",
+                                msg2:"Im BB"
+                            }
+                        },
+                        methods:{
+                            get:function (msg) {
+                                this.msg1=msg;
+
+                            },
+                            add1:function () {
+                                this.$emit('chi2',this.msg2)
+                            }
+                        },
+                        template:"#temp1",
+                        components:{
+                            bbb:{
+                                data(){
+                                 return{
+                                      msg2:"Im son"
+                                  }
+                                },
+                                methods:{
+                                  add:function () {
+                                      this.$emit('chi',this.msg2)
+                                  }
+                                },
+                                template:"#temp2"
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+{{msg4}}
+<aaa @chi2="get1"></aaa>
+<template id="temp1" >
+    <h1>我是父级=>{{msg1}}</h1>
+    <bbb @chi="get"></bbb>
+    <button @click="add1">点我传递数据给大哥</button>
+</template>
+<template id="temp2">
+    <button @click="add">点我传递数据</button>
+    <h2>我是子级</h2>
+</template>
+
+</body>
+</html>

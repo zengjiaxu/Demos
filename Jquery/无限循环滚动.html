@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        div{
+            width: 400px;
+            height: 200px;
+            margin: 100px auto;
+            overflow: hidden;
+            border: 2px solid orange;
+        }
+        ul{
+            width: 1200px;
+            height: 200px;
+        }
+        div>ul>li{
+            width: 200px;
+            height: 200px;
+            float: left;
+            list-style: none;
+        }
+        div>ul>li>img{
+            width: 200px;
+            height: 200px;
+        }
+
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            var offset=0;
+            var timer=null;
+            function autoPlay() {
+                 timer=setInterval(function () {
+                    offset+=-10;
+                    if (offset<=-800){
+                        offset=0;
+                    }
+                    $('ul').css('marginLeft',offset)
+                },60);
+            }
+            autoPlay();
+            $('li').mouseenter(function () {
+                clearInterval(timer);
+                $(this).siblings().fadeTo(100,0.5);
+                $('ul').css('background','black')
+            });
+            $('li').mouseleave(function () {
+                $(this).siblings().fadeTo(100,1);
+                autoPlay();
+            })
+        });
+    </script>
+</head>
+<body>
+<div>
+    <ul>
+        <li><img src="image/hy1.jpg" alt=""></li>
+        <li><img src="image/hy2.jpg" alt=""></li>
+        <li><img src="image/hy3.jpg" alt=""></li>
+        <li><img src="image/hy4.jpg" alt=""></li>
+        <li><img src="image/hy1.jpg" alt=""></li>
+        <li><img src="image/hy2.jpg" alt=""></li>
+    </ul>
+</div>
+
+</body>
+</html>

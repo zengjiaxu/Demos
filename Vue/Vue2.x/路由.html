@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .router-link-exact-active{
+            font-size: 20px;
+            color: orangered;
+            transition: .6s;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script src="bower_components/vue-router/dist/vue-router.min.js"></script>
+    <script>
+        window.onload=function () {
+            //创建模板
+            //配置路由
+            var routes=[
+                {
+                    path:"/home",
+                    component:{template:"#home"},
+                    children:[
+                        {path:"smile",component:{template:"#smile"}},
+                        {path:"cry",component:{template:"#cry"}},
+                        {path:"move",component:{template:"#move"}},
+                    ]
+                    },
+                {
+                    path:"/news",
+                    component:{template:"#news"},
+                    children:[
+                        {path:"news1",component:{template:"#news1"}},
+                        {path:"news2",component:{template:"#news2"}},
+                        {path:"news3",component:{template:"#news3"}},
+                    ]
+                    },
+                {
+                    path:"/game",
+                    component:{template:"#game"},
+                    children:[
+                        {path:"game1",component:{template:"#game1"}},
+                        {path:"game2",component:{template:"#game2"}},
+                        {path:"game3",component:{template:"#game3"}},
+                    ]
+                    },
+                {
+                    path:"/",
+                    redirect:"/news"
+                },
+            ];
+            // 生成路由
+            var router=new VueRouter({
+                routes
+            });
+
+            new Vue({
+                router,
+                el:"#box",
+                methods:{
+                    changed(){
+                        //router.push({path:"/game/game1"})
+                        router.replace({path:"/game/game1"})
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="button" @click="changed" value="点我">
+<router-link to="/home">主页</router-link>
+<router-link to="/news">新闻页</router-link>
+<router-link to="/game">游戏页面</router-link>
+<router-view></router-view>
+</div>
+<template id="home">
+    <div>
+        <h1>我是主页</h1>
+        <router-link to="/home/smile">笑一下</router-link>
+        <router-link to="/home/cry">哭一下</router-link>
+        <router-link to="/home/move">动一下</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id="news">
+    <div>
+        <h1>我是新闻</h1>
+        <router-link to="/news/news1">新闻11</router-link>
+        <router-link to="/news/news2">新闻12</router-link>
+        <router-link to="/news/news3">新闻13</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id="game">
+    <div>
+        <h1>我是游戏</h1>
+        <router-link to="/game/game1">游戏11</router-link>
+        <router-link to="/game/game2">游戏21</router-link>
+        <router-link to="/game/game3">游戏13</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<template id="smile">
+    <div>
+        <h1>我是微笑</h1>
+    </div>
+</template>
+<template id="cry">
+    <div>
+        <h1>我是哭泣</h1>
+    </div>
+</template>
+<template id="move">
+    <div>
+        <h1>我是移动</h1>
+    </div>
+</template>
+<template id="news1">
+    <div>
+        <h1>我是新闻1</h1>
+    </div>
+</template>
+<template id="news2">
+    <div>
+        <h1>我是新闻2</h1>
+    </div>
+</template>
+<template id="news3">
+    <div>
+        <h1>我是新闻3</h1>
+    </div>
+</template>
+<template id="game1">
+    <div>
+        <h1>我是游戏1</h1>
+    </div>
+</template>
+<template id="game2">
+    <div>
+        <h1>我是游戏2</h1>
+    </div>
+</template>
+<template id="game3">
+    <div>
+        <h1>我是游戏3</h1>
+    </div>
+</template>
+</body>
+</html>

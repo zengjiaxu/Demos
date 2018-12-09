@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+2 <html lang="en">
+3
+4 <head>
+    5     <meta charset="UTF-8">
+    6     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    7     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    8     <title>Document</title>
+    9     <!-- Step1.对于vue,可以用cdn -->
+    10     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    11     <style>
+    12         #app div{
+        13             padding: 2%;
+        14             margin-bottom: 1%;
+        15             border-bottom: 1px solid #ddd;
+        16             background-color: blanchedalmond;
+        17         }
+    18     </style>
+    19 </head>
+20
+21 <body>
+22
+23
+24     <div id="app">
+    25
+    26
+    27         <!-- 对象遍历 -->
+    28         <div v-for="(value, key, index) in object">
+    29             {{ index }}. {{ key }} - {{ value }}
+    30         </div>
+    31
+    32         <!-- 数组对象遍历 -->
+    33         <div v-for="(value, key, index) in objectArray">
+    34             姓名：{{value.name}}
+    35             年龄:{{value.age}}
+    36         </div>
+    37
+    38     </div>
+39
+40     <script type="text/javascript">
+    41         var app = new Vue({
+        42             el: '#app',
+        43             data: {
+        44                 // 对象
+        45                 object: {
+            46                     name: '张三',
+                47                     names: '李四'
+            48                 },
+        49
+        50                 // 数组对象
+        51                 objectArray: [
+            52                     {
+                53                         name: '张三',
+            54                         age: 14
+        55                     },
+        56                     {
+            57                         name: '李四',
+                58                         age: 18
+            59                     }
+        60                 ]
+        61             }
+    62         })
+    63     </script>
+64 </body>
+65
+66 </html>

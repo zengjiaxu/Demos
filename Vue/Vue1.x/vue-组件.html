@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+
+            new Vue({
+                el:".a",
+                components:{
+                    aaa:Vue.extend({
+                        data(){
+                            return {
+                                msg:'abc',
+                                msg2:'baby'
+                            }
+                        },
+                        methods:{
+                          add:function() {
+                              alert('1')
+                          }
+                        },
+                        template:'#temp'
+                    })
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+<template id="temp">
+    <h1>我是h1{{msg2}}<h2>我是h2{{msg}}</h2></h1><button @click="add">点我</button>
+</template>
+<div class="a">
+    <aaa></aaa>
+</div>
+
+
+</body>
+</html>

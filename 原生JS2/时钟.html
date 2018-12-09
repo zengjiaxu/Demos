@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            setInterval(show,1000);
+            function show () {
+                var oSp=document.getElementsByTagName('span');
+                var oDate=new Date();
+                oSp[0].innerHTML=oDate.getFullYear();
+                oSp[1].innerHTML=nMonth();
+                oSp[2].innerHTML=nDate(oDate.getDate());
+                oSp[3].innerHTML=nDay();
+                oSp[4].innerHTML=nDate(oDate.getHours());
+                oSp[5].innerHTML=nDate(oDate.getMinutes());
+                oSp[6].innerHTML=nDate(oDate.getSeconds());
+                function nDay() {
+                    if (oDate.getDay()==1){
+                        return '一';
+                    }
+                    if (oDate.getDay()==2){
+                        return '二';
+                    }
+                    if (oDate.getDay()==3){
+                        return '三';
+                    }
+                    if (oDate.getDay()==4){
+                        return '四';
+                    }
+                    if (oDate.getDay()==5){
+                        return '五';
+                    }
+                    if (oDate.getDay()==6){
+                        return '六';
+                    }
+                    if (oDate.getDay()==7){
+                        return '日';
+                    }
+
+                }
+                function nMonth() {
+                    if ((oDate.getMonth()+1)<=9) {
+                        return "0"+(oDate.getMonth()+1)
+                    }
+                    else{
+                        return (oDate.getMonth()+1)
+                    }
+                }
+                function nDate(a) {
+                    if (a<=9) {
+                        return "0"+a
+                    }
+                    else{
+                        return a;
+                    }
+                }
+            }
+            show();//让他立即执行 防止挺一秒
+
+
+
+        }
+    </script>
+</head>
+<body>
+ <span></span> 年 <span></span> 月 <span></span> 日 星期 <span></span> <span></span>: <span></span> : <span></span>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="vue/bower_components/animate.css/animate.min.css">
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .contain{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+        }
+        .active{
+            background: red;
+        }
+        .showed-transition{
+            transform: translateX(0);
+            transition: 0.5s linear;
+
+        }
+        .showed-leave{
+            transform: translateX(-200px);
+        }
+        .showed-enter{
+            transform: translateX(200px);
+        }
+
+
+    </style>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"body",
+                data:{
+                    oInput:["变啊","变哦","变哼"],
+                    oDiv:["yellow","blue","pink"],
+                    index:0,
+                    over:false
+                },
+                methods:{
+                    add:function(a) {
+                        if (this.over==true)return;
+                        this.index=a;
+                        this.over=true;
+                        var _this=this;
+                        setTimeout(function () {
+                            _this.over=false;
+                        },500)
+                    }
+                }
+            /*,
+                transitions: {
+                    showed:{
+                        enterClass: "fadeIn",
+                        leaveClass: "fadeOut"
+                    }
+
+                }*/
+
+            })
+        }
+
+
+
+    </script>
+
+
+</head>
+<body>
+<input type="button" v-for="i in oInput" :value=i @click="add($index)" :class="index==$index?'active':''" >
+<div class="contain" style="position: relative;">
+    <div v-for="i in oDiv" v-show="index==$index?true:false" :style='{width:"200px",height:"200px",background:i,position:"absolute"}'transition="showed" class="animated">{{i}}</div>
+</div>
+</body>
+</html>

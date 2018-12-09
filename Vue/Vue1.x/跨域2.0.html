@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text">
+<ul></ul>
+<script>
+var oInp=document.getElementsByTagName('input')[0];
+var oUl=document.getElementsByTagName('ul')[0];
+
+oInp.oninput=function () {
+    oUl.innerHTML='';
+    var os=document.createElement('script');
+    os.setAttribute('src','https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+this.value+'&cb=zz');//调用的函数
+    document.head.appendChild(os);//插进去的时候就调用了zz方法
+    os.remove();
+};
+    function zz(json) {   //被调用的函数
+        for (var i=0;i<json.s.length;i++){
+            var  oLi=document.createElement('li');
+            oLi.innerHTML=json.s[i];
+            oUl.appendChild(oLi)
+        }
+
+    }
+</script>
+</body>
+
+</html>

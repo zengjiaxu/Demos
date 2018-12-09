@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .submit{
+            text-align: center;
+        }
+        input[type=button],button{
+            border-radius: 5px;
+            background: rgba(86,176,255,0.4);
+            border: 1px solid rgba(86,176,255,0.8);
+            color: blue;
+            width: 70px;
+            cursor: pointer;
+        }
+        table{
+            width: 600px;
+            margin: 30px auto;
+
+        }
+        td {
+            text-align: center;
+        }
+
+
+    </style>
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            var arr=[];
+            //添加一条数据
+            $("#btn").on("click",function () {
+                if (arr.indexOf($('#inp1').val())!=-1||!$('#inp1').val()||!$('#inp2').val()){
+                    alert("数据不能重复且不能为空");
+                    return
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/servlet/registerServlet",
+                    data:{
+                        id:$('#inp1').val(),
+                        username:$('#inp2').val()
+                    },
+                    success: function(msg){
+                        var oCreat = $("<tr>\n" +
+                            "                <td>" + $('#inp1').val() + "</td>\n" +
+                            "                <td>" + $('#inp2').val() + "</td>\n" +
+                            "                <td><button>删除</button></td>\n" +
+                            "            </tr>");
+                        $("tbody").append(oCreat);
+
+                        arr.push($('#inp1').val());
+                        alert(msg)
+                    },
+                    error:function(){
+                        alert("failed")
+                    }
+
+                });
+
+
+
+
+            });
+            //删除一条数据
+            $("tbody").delegate('button','click',function () {
+                var _this=this;
+                $.ajax({
+
+                    type: "POST",
+                    url: "http://localhost:8080/servlet/deleterServlet",
+                    data: {
+                        "id":$(_this).parent().siblings().eq(0).html()
+                    },
+                    success: function(msg){
+                        alert(msg);
+                        $(_this).parents("tr").remove();
+                    },
+                    error:function(){
+                        alert(1)
+                    }
+                });
+            });
+            //修改一条数据
+            $("#btn1").on("click",function () {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/servlet/updatarServlet",
+                    data: {
+                        id:$('#inp1').val(),
+                        username:$('#inp2').val()
+                    },
+                    success: function(msg){
+                        alert(msg)
+                    },
+                    error:function () {
+                        alert("failed")
+                    }
+                });
+            });
+            //查询所有数据
+            $("#btn2").on("click",function () {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/servlet/queryrServlet",
+                    success: function(msg){
+                        alert(1)
+                        /*   $("tbody").html("");
+                      for (let i=0;i<msg.length;i++){
+                          var otr=$("<tr>\n" +
+                              "                <td>" + msg.data.id + "</td>\n" +
+                              "                <td>" + msg.data.username + "</td>\n" +
+                              "                <td><button>删除</button></td>\n" +
+                              "            </tr>");
+                          $("tbody").append(otr);
+                      }*/
+                    },
+                    error:function () {
+                        alert("failed")
+                    }
+                });
+            });
+            //查询一条
+            $("#btn3").on("click",function () {
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/servlet/queryOnerServlet",
+                    data:{
+                        id:$("#inp1").val()
+                    },
+                    success:function (msg) {
+
+                    },
+                    error:function () {
+                        alert("failed")
+                    }
+                })
+
+
+            })
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+    <div class="submit">
+        <form action="servlet/registerServlet" method="post">
+            ID：<input type="text" name="id" id="inp1" >
+            UserName:<input type="text" name="username" id="inp2">
+            <input type="button" value="添加" id="btn">
+            <input type="button" value="修改信息" id="btn1">
+            <input type="button" value="查询全部" id="btn2">
+            <input type="button" value="查询一条" id="btn3">
+        </form>
+    </div>
+    <div class="tab">
+        <table border="1" cellpadding="3px" cellspacing="0px">
+            <thead>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>操作</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/jquery-1.11.3.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script src="vue/bower_components/vue-resource/dist/vue-resource.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:'body',
+                data:{
+                    wd:'',
+                    arr:[]
+                },
+                methods:{
+                    changed:function () {
+                        this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+                            wd:this.wd,
+                        },{
+                            jsonp:'cb'/*回调函数的key值*/
+                        }).then(function (obj) {
+                            console.log(obj);
+                            this.arr=obj.data.s
+                        },function () {
+
+                        })
+                    }
+                }
+            })
+        }
+
+    </script>
+
+</head>
+<body>
+<input type="text" v-model="wd" @input="changed">
+<ul v-for="i in arr">
+    <li><a href="https://www.baidu.com/s?wd={{i}}">{{i}}</a></li>
+</ul>
+
+
+</body>
+</html>

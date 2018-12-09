@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+        .actived{
+            color: red;
+        }
+    </style>
+    <script src="node_modules/_vue@2.5.17@vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="app" @click="handleColor" :style="[myStyle,{fontSize:'20px'}]" >{{msg}}</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"hello",
+            myStyle:{
+                color:"red",
+                backgroundColor:"blue"
+            }
+        },
+        methods:{
+            handleColor(){
+               this.myStyle.color=  this.myStyle.color=="red"?"":"red"
+            }
+        }
+    })
+</script>
+</body>
+</html>

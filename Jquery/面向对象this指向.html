@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {/*对象：1.有引用机制2.可以赋予私有属性*/
+                var a=function () {
+
+                    alert(typeof a)
+                }; /*弹出window（实例化之前this指向window）*/
+             a();
+
+
+
+        });
+    </script>
+</head>
+<body>
+
+所有的DOM元素都是对象
+
+对象：
+1.有引用机制
+2.可以赋予私有属性
+3.只要是对象就不相等（）
+var a=[1,2,3]
+var b=a;       b==a引用机制
+var c=[1,2,3]   c!=a
+var d=new Array(1,2,3)   d!=a
+
+
+call   function show(){};
+show.call(this)  可以理解为（）里的第一个参数（例如this）调用了show方法
+
+
+
+</body>
+</html>

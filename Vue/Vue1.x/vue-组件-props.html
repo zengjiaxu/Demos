@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue/vue.min.js"></script>
+    <script>
+        window.onload=function () {
+            new Vue({
+                el:"#div1",
+                data:{
+                    msg:"hi",
+                    msg1:123
+                },
+                components:{
+                    aaa:Vue.extend({
+                        data(){
+                            return{
+                                msg3:"hehehe"
+                            }
+                        },
+                        /*props:['ko','kk'],*/
+                        props:{
+                            ko:String,
+                            kk:Number
+                        },
+                        template:"#temp",
+                        components:{
+                            ccc:Vue.extend({
+                                props:['kkk'],
+                                template:"#temp1"
+                            })
+                        }
+                    })
+                }
+            })
+        };
+
+    </script>
+</head>
+<body>
+<div id="div1">
+    <aaa :ko="msg" :kk="msg1"></aaa>
+</div>
+<template id="temp">
+<h1>hello</h1>
+    <h2>{{ko}}</h2>
+    <h3>{{kk}}</h3>
+    <ccc :kkk="msg3"></ccc>
+</template>
+<template id="temp1">
+    <h1>{{kkk}}=>dsada</h1>
+</template>
+
+</body>
+</html>
