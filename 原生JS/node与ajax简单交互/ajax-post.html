@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+
+      window.onload=function () {
+          var oI1 = document.getElementById("username");
+          var oI2 = document.getElementById("pass");
+          var oBtn = document.getElementById("btn");
+          oBtn.onclick = function () {
+              $.ajax({
+                  url: "http://localhost:9217/jax",
+                  type: "POST",
+                  data: {
+                      username: oI1.value,
+                      pass: oI2.value
+                  },
+                  success: function (data) {
+                      alert(data)
+                  },
+                  error: function () {
+                      alert("服务器错误")
+                  }
+              })
+             /* var xhr=new XMLHttpRequest();
+          xhr.open("post","http://localhost:9217",true);
+          xhr.setRequestHeader ("CONTENT-TYPE", "application/x-www-form-urlencoded" );
+          xhr.send("username=jax&pass=12345");
+          xhr.onreadystatechange=function () {
+              if (xhr.readyState==4){
+                  if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+                      console.log(xhr.responseText);
+                  }else{
+                      console.log("服务器错误");
+                  }
+              }
+          }*/
+          }
+      }
+    </script>
+</head>
+<body>
+用户：<input type="text"  name="username" id="username"><br>
+密码：<input type="password" name="pass" id="pass"><br>
+<input type="button" value="登录" id="btn">
+</body>
+</html>

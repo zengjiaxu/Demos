@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="./favicon.ico" />
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var user=document.getElementById("user");
+            var pass=document.getElementById("pass");
+            var oDiv=document.getElementById("div1");
+            $.ajax({
+                "url":"http://localhost:9237/jax",
+                type:"get",
+                success:function (data) {
+                    user.value=data.user;
+                    pass.value=data.value;
+                    setTimeout(function () {
+                        $.ajax({
+                            "url":"http://localhost:9237/login",
+                            type:"get",
+                            data:{
+                                user:user.value,
+                                pass:pass.value
+                            },
+                            success:function (data) {
+                                alert(data);
+                                oDiv.innerHTML="欢迎您";
+                            }
+                        })
+                    },5000);
+
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+<div id="div1">
+用户：<input type="text" id="user"><br>
+密码：<input type="password" id="pass"><br>
+<button id="login">登录</button>
+<input type="checkbox">自动登录
+</div>
+</body>
+</html>

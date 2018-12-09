@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        window.onload=function () {
+            var oI1=document.getElementById("username");
+            var oI2=document.getElementById("pass");
+            var oBtn=document.getElementById("btn");
+            oBtn.onclick=function () {
+/*$.ajax({
+    url:'http://localhost:9217',
+    type:"get",
+    data:{
+      username:oI1.value,
+      pass:oI2.value
+    },
+    success:function (msg) {
+        alert(msg)
+    },
+    error:function () {
+        console.log("服务器错误");
+    }
+})*/
+                var xml=new XMLHttpRequest();
+                xml.open('get','http://localhost:9217/?username='+oI1.value+'&pass='+oI2.value,true);
+                xml.send();
+                xml.onreadystatechange=function(){
+                    if(xml.readyState==4){
+                        if (xml.status>=200&&xml.status<300||xml.status==304){
+                            alert(xml.responseText)
+                        }
+                        else{
+                            console.log("服务器错误！");
+                        }
+
+                    }
+                };
+            };
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+用户：<input type="text"  name="username" id="username"><br>
+密码：<input type="password" name="pass" id="pass"><br>
+<input type="button" value="登录" id="btn">
+</body>
+</html>
